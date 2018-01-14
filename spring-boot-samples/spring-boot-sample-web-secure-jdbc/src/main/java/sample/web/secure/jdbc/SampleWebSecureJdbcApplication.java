@@ -74,6 +74,47 @@ public class SampleWebSecureJdbcApplication implements WebMvcConfigurer {
 		public JdbcUserDetailsManager jdbcUserDetailsManager(DataSource dataSource) {
 			JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager();
 			jdbcUserDetailsManager.setDataSource(dataSource);
+
+			jdbcUserDetailsManager.setAuthoritiesByUsernameQuery("select username,authority "
+                    + "from authority " + "where username = ?");
+			jdbcUserDetailsManager.setGroupAuthoritiesByUsernameQuery("select g.id, g.group_name, ga.authority "
+                    + "from group g, group_member gm, group_authority ga "
+                    + "where gm.username = ? " + "and g.id = ga.group_id "
+                    + "and g.id = gm.group_id");
+			jdbcUserDetailsManager.setUsersByUsernameQuery("select username,password,enabled "
+                    + "from user " + "where username = ?");
+
+			jdbcUserDetailsManager.setChangePasswordSql("update user set password = ? where username = ?");
+			jdbcUserDetailsManager.setCreateAuthoritySql("insert into authority (username, authority) values (?,?)");
+			jdbcUserDetailsManager.setCreateUserSql("insert into user (username, password, enabled) values (?,?,?)");
+
+			jdbcUserDetailsManager.setDeleteGroupSql("delete from group where id = ?");
+			jdbcUserDetailsManager.setDeleteGroupAuthoritiesSql("delete from group_authority where group_id = ?");
+            jdbcUserDetailsManager.setDeleteGroupAuthoritySql("delete from group_authority where group_id = ? and authority = ?");
+            jdbcUserDetailsManager.setDeleteGroupMemberSql("delete from group_member where group_id = ? and username = ?");
+            jdbcUserDetailsManager.setDeleteGroupMembersSql("delete from group_member where group_id = ?");
+            jdbcUserDetailsManager.setDeleteUserSql("delete from user where username = ?");
+            jdbcUserDetailsManager.setDeleteUserAuthoritiesSql("delete from authority where username = ?");
+
+            jdbcUserDetailsManager.setFindAllGroupsSql("select group_name from group");
+            jdbcUserDetailsManager.setFindGroupIdSql("select id from group where group_name = ?");
+            jdbcUserDetailsManager.setFindUsersInGroupSql("select username from group_member gm, group g "
+                    + "where gm.group_id = g.id" + " and g.group_name = ?");
+
+            jdbcUserDetailsManager.setGroupAuthoritiesSql("select g.id, g.group_name, ga.authority "
+                    + "from group g, group_authority ga "
+                    + "where g.group_name = ? "
+                    + "and g.id = ga.group_id ");
+
+            jdbcUserDetailsManager.setInsertGroupSql("insert into group (group_name) values (?)");
+            jdbcUserDetailsManager.setInsertGroupAuthoritySql("insert into group_authority (group_id, authority) values (?,?)");
+            jdbcUserDetailsManager.setInsertGroupMemberSql("insert into group_member (group_id, username) values (?,?)");
+
+            jdbcUserDetailsManager.setRenameGroupSql("update group set group_name = ? where group_name = ?");
+
+            jdbcUserDetailsManager.setUpdateUserSql("update user set password = ?, enabled = ? where username = ?");
+            jdbcUserDetailsManager.setUserExistsSql("select username from user where username = ?");
+
 			return jdbcUserDetailsManager;
 		}
 
