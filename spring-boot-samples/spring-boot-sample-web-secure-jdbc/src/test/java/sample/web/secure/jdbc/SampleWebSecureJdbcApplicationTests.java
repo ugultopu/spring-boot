@@ -16,13 +16,14 @@
 
 package sample.web.secure.jdbc;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
@@ -37,8 +38,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Basic integration tests for demo application.

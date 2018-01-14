@@ -1,3 +1,1 @@
-insert into user (username, password, enabled) values ('user', '{noop}user', true);
-
-insert into authority (username, authority) values ('user', 'ROLE_ADMIN');
+insert into user (id, username, password) values (0, 'user', '{noop}user');
