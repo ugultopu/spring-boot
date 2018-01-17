@@ -1,3 +1,12 @@
-insert into users (username, password, enabled) values ('user', 'user', true);
-
-insert into authorities (username, authority) values ('user', 'ROLE_ADMIN');
+INSERT INTO USER (username,
+                  password,
+                  enabled,
+                  account_non_expired,
+                  account_non_locked,
+                  credentials_non_expired)
+VALUES ('user',
+        'user',
+        TRUE,
+        TRUE,
+        TRUE,
+        TRUE);
