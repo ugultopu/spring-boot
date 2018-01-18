@@ -32,6 +32,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+/*
+ * TODO
+ * Add a PasswordEncoder bean of type BCryptPasswordEncoder. Not sure how I
+ * should add it though:
+ * - Should I create a method with @Bean annotation which returns a
+ * new BCryptPasswordEncoder();
+ * - Or should I create a new @Component? (I think not because we are not
+ * creating a new class. We are just declaring an existing class should be the
+ * bean for the PasswordEncoder.
+ * - Or should I do it with a different method?
+ *
+ * - If I use the first method, where should I put the method with the @Bean
+ * annotation?
+ */
 @SpringBootApplication
 @Controller
 public class SampleWebSecureJdbcApplication extends WebMvcConfigurerAdapter {

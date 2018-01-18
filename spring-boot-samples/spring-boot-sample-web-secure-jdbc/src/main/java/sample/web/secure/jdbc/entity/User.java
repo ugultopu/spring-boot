@@ -4,7 +4,6 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -26,17 +25,7 @@ public class User implements UserDetails {
 
     private String password;
 
-    /*
-     * FIXME
-     * fetch = FetchType.EAGER is a workaround. Find the real reason for the
-     * following error and fix it:
-     *
-     *     org.hibernate.LazyInitializationException: failed to lazily
-     *     initialize a collection of role:
-     *     sample.web.secure.jdbc.entity.User.authorities,
-     *     could not initialize proxy - no Session
-     */
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     private Set<Authority> authorities;
 
     private boolean accountNonExpired;
